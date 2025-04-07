@@ -47,10 +47,8 @@
         <h6 class="mt-3">Available Days:</h6>
         <div class="btn-group d-flex flex-wrap" role="group" aria-label="Select Days">
           <% ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].each do |day| %>
-            <label class="btn btn-outline-primary m-1
-                         <%= 'disabled' if Date::DAYNAMES.index(day) < Date.today.wday %>">
-              <%= check_box_tag "meal[days][]", day, false,
-                                { disabled: Date::DAYNAMES.index(day) < Date.today.wday } %>
+            <label class="btn btn-outline-primary m-1 <%= 'disabled' if (!Date.today.saturday? && !Date.today.sunday? && Date::DAYNAMES.index(day) <= Date.today.wday)%> %>">
+              <%= check_box_tag "meal[days][]", day, false, class: ('disabled' if (!Date.today.saturday? && !Date.today.sunday? && Date::DAYNAMES.index(day) <= Date.today.wday)) %>
               <%= day %>
             </label>
           <% end %>

@@ -29,16 +29,7 @@
           <span><%= @meal.calories %></span>
         </li>
       </ul>
-
-      <!-- Days Associated with the Meal -->
-      <h6 class="mt-3">Available Days:</h6>
-      <div class="btn-group d-flex flex-wrap" role="group" aria-label="Selected Days">
-        <% @meal.days.each do |day| %>
-          <label class="btn btn-outline-primary m-1">
-            <%= day.name %>  <!-- Assuming 'name' is an attribute in the 'days' table -->
-          </label>
-        <% end %>
-      </div>
+      
 
       <!-- Actions (Edit, Delete, Back) -->
       <div class="mt-2 text-center">
