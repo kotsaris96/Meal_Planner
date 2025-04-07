@@ -11,15 +11,17 @@ class Api::V1::UserDayMealFilterAndSortService
   end
 
   def self.filter_selected_meals(user, day_id, meals)
-    meals.joins(:user_day_meals)
-         .left_joins(:user_meal_likes)
-         .where(user_day_meals: { user_id: user.id, is_selected: true, day_id: day_id })
+    meals.joins(:user_day_meals).where(user_day_meals: { user_id: user.id, is_selected: true, day_id: day_id })
+         .joins("LEFT JOIN user_meal_likes
+              ON user_meal_likes.meal_id = meals.id
+              AND user_meal_likes.user_id = #{user.id}")
          .select(:id, :title, :description, :meal_type, :calories, :is_selected, :is_like)
   end
 
   def self.ordered_liked_meals(user, meals)
-    meals.left_joins(:user_meal_likes)
-         .where(user_meal_likes: { user_id: [ user.id, nil ] })
+    meals.joins("LEFT JOIN user_meal_likes
+              ON user_meal_likes.meal_id = meals.id
+              AND user_meal_likes.user_id = #{user.id}")
          .order(user_meal_likes: { is_like: :asc })
          .select(:id, :title, :description, :meal_type, :calories, :is_like)
   end
