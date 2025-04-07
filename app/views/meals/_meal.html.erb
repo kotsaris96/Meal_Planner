@@ -1,0 +1,44 @@
+<% meal ||= @meal %>
+
+        <!-- Meal Title -->
+        <div><strong>Title:</strong> <%= meal.title %></div>
+
+        <ul class="list-group">
+
+          <!--Meal Description -->
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>Description:</strong>
+            <span><%= meal.description %></span>
+          </li>
+
+          <!-- Meal Type -->
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>Meal Type:</strong>
+            <span><%= meal.meal_type %></span>
+          </li>
+
+          <!-- Meal Calories -->
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>Calories:</strong>
+            <span><%= meal.calories %></span>
+          </li>
+
+
+            <% if user_signed_in? && @user_liked_meals.include?(meal.id) %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Like Status:</strong>
+                <span class="text-success">❤️ Liked</span>
+              </li>
+            <% end %>
+        </ul>
+
+
+        <div class="mt-3 text-center">
+          <%= link_to "View", meal_path(meal), class: "btn btn-info btn-sm" %>
+          <%= link_to "Edit", edit_meal_path(meal), class: "btn btn-warning btn-sm" %>
+          <%= button_to "Delete", meal_path(meal), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm mt-1" %>
+        </div>
+
+
+
+

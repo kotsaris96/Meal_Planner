@@ -1,0 +1,29 @@
+
+<% if current_user.is_admin == 1 && current_user.present? %>
+  <%= render "shared/nav" %>
+  <h1 class="text-center mt-5">All Meals</h1>
+
+  <div class="row gx-4 justify-content-center mt-3 mb-5 mx-3">
+    <% @meal.each do |meal| %>
+      <div class="col-sm-3 col-12 mt-4">
+        <div class="p-3 rounded-2 border rounded-2">
+          <%= render partial: "meal", locals: { meal: meal } %>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Pagination -->
+    <%= paginate @meal, theme: 'bootstrap-5',
+                 pagination_class: "pagination-sm flex-wrap justify-content-center",
+                 nav_class: "d-inline-block mt-4"%>
+  </div>
+<% else %>
+  You are not allowed to access this page !
+  <%= link_to "Back", meals_by_day_path(week_id: current_week&.id), class: "btn btn-danger btn-sm mt-1" %>
+<% end %>
+
+
+
+
+
+

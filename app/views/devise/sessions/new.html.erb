@@ -1,0 +1,59 @@
+
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-xl-10 col-lg-8 col-md-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+
+
+                <div class="text-center">
+                  <img src="https://raketcontent.com/1/Yellow_Illustrated_Meal_My_Weekly_Planner_Menu_20240604_182725_0000_f14f4fbc02.jpg"
+                       style="width: 185px;" alt="logo">
+                  <h4 class="mt-1 mb-5 pb-1">Meal Planner</h4>
+                </div>
+
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <p>Sign into your account</p>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", placeholder: "E-mail" %>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <%= f.password_field :password, class: "form-control", autocomplete: "current-password", placeholder: "Password" %>
+                  </div>
+
+                  <% if devise_mapping.rememberable? %>
+                    <div class="text-center">
+                      <%= f.check_box :remember_me, class: "mb-3" %>
+                      <%= f.label :remember_me %>
+                      </br>
+                      <%= f.submit "Log in", class: "btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" %>
+                    </div>
+                  <% end %>
+                <% end %>
+
+                <div class="text-center">
+                  <%= render "devise/shared/links" %>
+                </div>
+
+
+              </div>
+            </div>
+
+            <!-- Right Column: Side Information -->
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4 mt-1">
+                <h4 class="mb-4">Your Meal Planning, Simplified</h4>
+                <p class="small mb-0">Easily plan nutritious and balanced meals for your workweek with our Meal Planner tool. Designed to help employees stay healthy and energized. The app allows you to create personalized meal plans. Save time, improve productivity, and promote well-being in the workplace with convenient, healthy meal options tailored to your needs.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

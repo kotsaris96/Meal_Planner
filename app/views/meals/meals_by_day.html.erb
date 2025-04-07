@@ -1,0 +1,81 @@
+<%= render "shared/nav" %>
+
+
+<div class="sticky-top bg-light border-bottom shadow py-2">
+  <div class="container text-center">
+
+    <!-- Centered Title -->
+    <div class="fw-bold fs-5 mt-2 mb-1">Meals for Week: <%= @week.weekday_start %> - <%= @week.weekday_end %></div>
+
+    <!-- Navigation Buttons Below -->
+    <div class="d-flex justify-content-between">
+      <% if @prev_week %>
+        <%= link_to "← Previous Week", meals_by_day_path(week_id: @prev_week.id), class: "btn btn-outline-primary" %>
+      <% else %>
+        <button class="btn btn-outline-secondary" disabled>← Previous Week</button>
+      <% end %>
+
+      <% if @next_week %>
+        <%= link_to "Next Week →", meals_by_day_path(week_id: @next_week.id), class: "btn btn-outline-primary" %>
+      <% else %>
+        <button class="btn btn-outline-secondary" disabled>Next Week →</button>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- Meals Content -->
+<div class="container mt-2">
+  <% @week.days.each do |day| %>
+    <div class="card mb-4 <%= 'bg-light' if day.date < Date.today %>">
+      <div class="card-header <%= day.date < Date.today ? 'bg-secondary text-center' : 'bg-primary text-white' %>">
+        <h4 class="mb-0">
+          <%= day.date.strftime('%A, %d %B %Y') %>
+          <% if day.date < Date.today %>
+            <span class="text-center" style="color: #ffc107;">(This day has passed)</span>
+          <% end %>
+        </h4>
+      </div>
+      <div class="card-body">
+        <% if day.meals.any? %>
+          <div class="row justify-content-center">
+            <% day.meals.each do |meal| %>
+              <div class="col-md-4">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <strong>Title:</strong> <%= meal.title %>
+                    <ul class="list-group mt-2">
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <strong>Description:</strong>
+                        <span><%= meal.description %></span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <strong>Meal Type:</strong>
+                        <span><%= meal.meal_type %></span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <strong>Calories:</strong>
+                        <span><%= meal.calories %> kcal</span>
+                      </li>
+                      <% if user_signed_in? && @user_liked_meals.include?(meal.id) %>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          <strong>Like Status:</strong>
+                          <span class="text-success">❤️ Liked</span>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted">No meals assigned for this day.</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

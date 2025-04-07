@@ -1,0 +1,74 @@
+<%= render "shared/nav" %>
+
+<section class="vh-100" style="background-color: #eee;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                  <%= render "devise/shared/error_messages", resource: resource %>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                      <%= f.email_field :email, placeholder: "E-mail", class: " form-label form-control", autofocus: true, autocomplete: "email" %>
+                    </div>
+                  </div>
+
+                  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                  <% end %>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                      <i>(leave blank if you don't want to change it)</i><br />
+                      <%= f.password_field :password, placeholder: "Password", class: " form-label form-control", autocomplete: "new-password" %>
+                      <% if @minimum_password_length %>
+                        <br />
+                        <em style="color: red;"><%= @minimum_password_length %> characters minimum</em>
+                      <% end %>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                      <%= f.password_field :password_confirmation, class: "form-label form-control", placeholder: "Password confirmation", autocomplete: "new-password" %>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                      <i>(we need your current password to confirm your changes)</i><br />
+                      <%= f.password_field :current_password, class: "form-label form-control", placeholder: "Current password", autocomplete: "current-password" %>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <%= f.submit "Update", class: "btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" %>
+                  </div>
+                <% end %>
+
+                <h3>Cancel my account</h3>
+
+                <div class="d-flex flex-column justify-content-center mx-4 mb-3 mb-lg-4">
+                  <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "mb-2 btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" %>
+                  <%= link_to "Back", :back, class: "mt-2 btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" %>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
