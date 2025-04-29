@@ -21,7 +21,7 @@ Ensure you have the following installed:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/skroutz-university/team1-backend.git
+   git clone https://github.com:kotsaris96/Meal_Planner.git
    cd team1-backend.git
 
 2. **Install dependencies**
